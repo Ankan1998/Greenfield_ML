@@ -26,5 +26,5 @@ class lin_reg:
 			self.weights=self.weights-self.alpha*dW
 
 	def predict(self,X):
-		return np.dot(x,self.weights) + self.bias
+		return np.dot(X,self.weights) + self.bias
 
