@@ -1,8 +1,11 @@
 import numpy as np
 class GaussianNaiveBayes:
+
+    def __init__(self,spar=10e-3):
+        self.spar=spar
     
     # fit methods trains the data
-    def fit(self,X,y,spar=10e-3): # here self is the variable which refers to current object of class 
+    def fit(self,X,y): # here self is the variable which refers to current object of class 
         number_of_sample,number_of_features = X.shape # returns shape of X which is NxD dimensional
         # categories contains classes in Y uniquely due to Set
         self.categories=np.unique(y)
@@ -19,7 +22,7 @@ class GaussianNaiveBayes:
         for classes in self.categories:
             X_classes=X[classes==y] # grouping into X_classes array according to category in y
             self.gaussian_mean[classes,:]=X_classes.mean(axis=0) # mean with each row of sample belonging particular column(features)
-            self.gaussian_var[classes,:]=X_classes.var(axis=0)+spar
+            self.gaussian_var[classes,:]=X_classes.var(axis=0)+self.spar
             self.log_prior[classes]=np.log(X_classes.shape[0]/float(number_of_sample)) #number of sample in a class/ total samples
             # i have logged prior because in posterior we will be calculation log_pdf in predict
             
